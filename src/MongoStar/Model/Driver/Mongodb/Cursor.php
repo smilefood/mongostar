@@ -35,10 +35,11 @@ class Cursor extends \MongoStar\Model\Driver\CursorAbstract
      *
      * @param \MongoStar\Model $model
      * @param \MongoDB\Driver\Query $query
+     * @param array $config
      */
-    public function __construct(\MongoStar\Model $model, \MongoDB\Driver\Query $query)
+    public function __construct(\MongoStar\Model $model, \MongoDB\Driver\Query $query, array $config = [])
     {
-        parent::__construct($model, []);
+        parent::__construct($model, [], $config);
         $this->_query = $query;
     }
 
@@ -204,7 +205,7 @@ class Cursor extends \MongoStar\Model\Driver\CursorAbstract
     public function getCollectionNamespace() : string
     {
         return implode('.', [
-            \MongoStar\Config::getConfig()['db'],
+            $this->getConfig()['db'],
             $this->getModel()->getMeta()->getCollection()
         ]);
     }
@@ -215,7 +216,7 @@ class Cursor extends \MongoStar\Model\Driver\CursorAbstract
      */
     private function _executeQuery(\MongoDB\Driver\Query $query) : \MongoDB\Driver\Cursor
     {
-        $manager = Driver::getManager();
+        $manager = $this->getModel()->getManager();
 
         return $manager->executeQuery(
             $this->getCollectionNamespace(),
