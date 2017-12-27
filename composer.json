@@ -10,7 +10,7 @@
   },
   "requirements": {
     "php": ">=7",
-    "ext-mongodb": ">=3",
+    "ext-libmongoc": ">=1.8.5",
     "ext-openssl": "*"
   }
 }
