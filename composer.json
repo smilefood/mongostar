@@ -8,7 +8,7 @@
   "autoload": {
     "psr-0": { "MongoStar": "src/" }
   },
-  "requirements": {
+  "require": {
     "php": ">=7",
     "ext-mongodb": ">=1.8.5",
     "ext-openssl": "*"
