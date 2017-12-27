@@ -69,12 +69,13 @@ class Driver extends \MongoStar\Model\Driver\DriverAbstract
     public function save()
     {
         $bulk = new \MongoDB\Driver\BulkWrite();
-        $data = $this->getModel()->getData();
+
+        $data = $this->_replaceIdToObjectId(
+            $this->getModel()->getData()
+        );
 
         if ($this->getModel()->id) {
             $cond = $this->_replaceIdToObjectId(['id' => $this->getModel()->id]);
-            $data = $this->_replaceIdToObjectId($data);
-
             $bulk->update($cond, ['$set' => $data], ['multi' => true, 'upsert' => false]);
         }
         else {
