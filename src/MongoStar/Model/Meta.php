@@ -126,6 +126,15 @@ final class Meta
     }
 
     /**
+     * @param string $name
+     * @return bool
+     */
+    public function hasProperty(string $name) : bool
+    {
+        return isset($this->_assocProperties[$name]);
+    }
+
+    /**
      * @param \MongoStar\Model $model
      *
      * @throws Meta\Exception\CollectionCantBeWithoutPrimary
