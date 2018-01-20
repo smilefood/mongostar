@@ -226,6 +226,10 @@ abstract class DocumentAbstract implements \ArrayAccess
             if (!$isSet && !$value) {
                 return null;
             }
+
+            if ($toArray && !$value) {
+                return null;
+            }
             
             if ($toArray) {
                 return $model->toArray();
