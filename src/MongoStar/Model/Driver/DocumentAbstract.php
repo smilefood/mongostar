@@ -69,10 +69,7 @@ abstract class DocumentAbstract implements \ArrayAccess
     public function populate(array $data)
     {
         foreach ($this->getModel()->getMeta()->getProperties() as $property) {
-
-            if (isset($data[$property->getName()])) {
-                $this->setProperty($property, $data[$property->getName()]);
-            }
+            $this->setProperty($property, $data[$property->getName()] ?? null);
         }
     }
 
